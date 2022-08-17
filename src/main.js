@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import '/theme.css'
+import translateplugin from "@/translateplugin";
 
-createApp(App).mount('#app')
+
+const app = createApp(App)
+
+app.use(translateplugin)
+app.mount('#app')
 // directive(
 //     //ГЛОБАЛЬНАЯ РЕГИСТАРЦИЯ ДИРЕКТИВЫ
 //     'foces',{
