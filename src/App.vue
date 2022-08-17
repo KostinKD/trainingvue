@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div class="card" v-if="show">
+      <h2 v-color:[type].blink.hover="myColor">Директивы</h2>
+      <div class="form-control">
+        <label for="inputtext">Активный по умолчанию</label>
+        <input type="text" name="text" id="inputtext" v-foces>
+      </div>
+      <button class="btn" @click="myColor = 'darkblue'">Синий</button>
+      <button class="btn" @click="type = type === 'color' ? 'background' : 'color'">Переключить тип</button>
+      {{type}}
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import focuscustom from "@/directives/focuscustom";
+import colorDirective from "@/directives/colorDirective";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return{
+      myColor: 'darkred',
+      type: 'color',
+      show: true
+    }
+  },
+// mounted() {
+//   setTimeout(()=>{
+//     this.show = false
+//   },2000)
+// },
+  //ЛОКАЛЬНАЯ РЕГИСТРАЦИЯ КОМПОНЕНТОВ
+  directives:{
+    foces: focuscustom,
+    color: colorDirective
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>
