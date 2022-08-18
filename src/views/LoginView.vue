@@ -1,7 +1,7 @@
 <template>
 
   <form class="card" @submit.prevent="submit">
-    <h2>Мини клон Gmail</h2>
+    <h2>Работа с Router</h2>
     <div class="form-control">
       <label for="email">Email</label>
       <input type="text" id="email" v-model.trim="email">
@@ -34,10 +34,11 @@ export default {
       return this.email !== '' && this.password !== ''
     }
   },
+  inject: ['login'],
   methods: {
     submit() {
       if (this.isValid) {
-        // login
+        this.login()
       }
     }
   }

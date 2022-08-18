@@ -1,12 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import loginView from "@/views/LoginView";
+import ForgetView from "@/views/ForgetView";
+import DashboardView from "@/views/DashboardView";
+import MailView from "@/views/MailView";
 
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'login',
-    component: loginView
+    component: loginView,
+    alias: '/'
+
+  },
+  {
+    path: '/forget',
+    name: 'forget',
+    component: ForgetView
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashboardView
+  },
+  {
+    path: '/mail',
+    name: 'mail',
+    component: MailView
   },
   // {
   //   path: '/about',
@@ -20,7 +40,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
 })
 
 export default router
