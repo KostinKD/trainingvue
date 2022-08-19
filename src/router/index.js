@@ -3,6 +3,7 @@ import loginView from "@/views/LoginView";
 import ForgetView from "@/views/ForgetView";
 import DashboardView from "@/views/DashboardView";
 import MailView from "@/views/MailView";
+import AppEmailBody from "@/components/AppEmailBody";
 
 
 const routes = [
@@ -11,7 +12,6 @@ const routes = [
     name: 'login',
     component: loginView,
     alias: '/'
-
   },
   {
     path: '/forget',
@@ -26,7 +26,11 @@ const routes = [
   {
     path: '/mail',
     name: 'mail',
-    component: MailView
+    component: MailView,
+    props: true,
+    children: [
+        {path: ':mailId?', component: AppEmailBody, props: true}
+    ]
   },
   // {
   //   path: '/about',
