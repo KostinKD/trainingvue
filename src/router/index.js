@@ -4,6 +4,7 @@ import ForgetView from "@/views/ForgetView";
 import DashboardView from "@/views/DashboardView";
 import MailView from "@/views/MailView";
 import AppEmailBody from "@/components/AppEmailBody";
+import notFound from "@/views/NotFound";
 
 
 const routes = [
@@ -32,6 +33,9 @@ const routes = [
         {path: ':mailId?', component: AppEmailBody, props: true}
     ]
   },
+  {
+    path: '/:notFound(.*)', component: notFound
+  }
   // {
   //   path: '/about',
   //   name: 'about',
