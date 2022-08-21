@@ -6,6 +6,15 @@ export default createStore({
     isAuth: true
   },
   getters: {
+    counterGetter(state){
+      if (state.counter > 10) {
+        return 0
+      }
+      return state.counter
+    },
+    doubleCounter(_, getters){
+      return getters.counterGetter * 2
+    }
   },
   mutations: {
     increment(state){
@@ -16,6 +25,11 @@ export default createStore({
     }
   },
   actions: {
+    incrementAsync(context, payload){
+      setTimeout(()=>{
+        context.commit('addFive',payload)
+      }, payload.delay)
+    }
   },
   modules: {
   }

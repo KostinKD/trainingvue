@@ -3,9 +3,10 @@
   <div class="container with-nav">
     <div class="card">
       <h1>VUEX</h1>
-      <h2>Counter: {{ $store.state.counter }}</h2>
+      <h2>Counter: {{ $store.getters.counterGetter }} ({{$store.getters.doubleCounter}})</h2>
       <h2>Counter: {{ $store.state.isAuth }}</h2>
-      <button class="btn" @click="increment">Do it!</button>
+      <button class="btn" @click="add">Do it!</button>
+      <button class="btn" @click="incrementAsync">Do it! + 10</button>
     </div>
   </div>
 </template>
@@ -26,12 +27,18 @@ export default {
   // },
 //  OLD METHONDs and local state
   methods: {
-    increment(){
+    add(){
       //Использование обычной функции в компоненте
       // this.$store.state.counter++
       //Использование mutations через стор
       this.$store.commit('increment')
       this.$store.state.isAuth = false
+    },
+    incrementAsync(){
+      this.$store.dispatch('incrementAsync', {
+        value: 200,
+        delay: 2000
+      })
     }
   }
 }
