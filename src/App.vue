@@ -1,15 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <TheNavbar></TheNavbar>
+  <div class="container with-nav">
+    <div class="card">
+      <h1>VUEX</h1>
+      <h2>Counter: {{ $store.state.counter }}</h2>
+      <h2>Counter: {{ $store.state.isAuth }}</h2>
+      <button class="btn" @click="increment">Do it!</button>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+
+import TheNavbar from "@/components/TheNavbar";
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TheNavbar
+  },
+  // data(){
+  //   return {
+  //     counter: 0
+  //   }
+  // },
+//  OLD METHONDs and local state
+  methods: {
+    increment(){
+      //Использование обычной функции в компоненте
+      // this.$store.state.counter++
+      //Использование mutations через стор
+      this.$store.commit('increment')
+      this.$store.state.isAuth = false
+    }
   }
 }
 </script>
