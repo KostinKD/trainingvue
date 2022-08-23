@@ -11,7 +11,7 @@ export default {
             }
             return state.counter
         },
-        doubleCounter(_, getters){
+        doubleCounter(state, getters, rootState, rootGetters){
             return getters.counterGetter * 2
         }
     },

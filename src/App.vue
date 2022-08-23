@@ -22,8 +22,12 @@ export default {
   components: {
     TheNavbar
   },
+  // computed: {
+  //   // ...mapGetters(['counterGetter', 'doubleCounter', 'lowerCaseTitle'])
+  // },
   computed: {
-    ...mapGetters(['counterGetter', 'doubleCounter', 'lowerCaseTitle'])
+    ...mapGetters(['lowerCaseTitle']),
+    ...mapGetters('countertestname',['counterGetter', 'doubleCounter'])
   },
   // data(){
   //   return {
@@ -34,9 +38,9 @@ export default {
   methods: {
     // ...mapMutations(['increment']),
     ...mapMutations({
-      add: 'increment'
+      add: 'countertestname/increment'
     }),
-    ...mapActions(["incrementAsync"]),
+    ...mapActions('countertestname',["incrementAsync"]),
     // add(){
     //   //Использование обычной функции в компоненте
     //   // this.$store.state.counter++

@@ -2,7 +2,7 @@
 
   <div class="navbar">
 <!--    {{ counters.counter }}-->
-    <p>{{ lowerCaseTitle }}</p>
+    <p>{{ counter }}</p>
     <button class="btn" @click="add">Add</button>
   </div>
 </template>
@@ -13,14 +13,14 @@ import {mapGetters, mapMutations} from 'vuex'
 export default {
   // Обращение напрямую минуя store т.к у нас есть зависимость
   computed: {
-    // counters(){
-    //   return this.$store.getters.counter
-    // },
+    counter(){
+      return this.$store.getters.counter['countertestname/counter']
+    },
     //
-    ...mapGetters(['counter', 'lowerCaseTitle'])
+    ...mapGetters('countertestname',['counter'])
   },
   methods: {
-    ...mapMutations(['addFive']),
+    ...mapMutations('countertestname',['addFive']),
     add(){
       this.addFive({value: 1 })
       // vuex style
