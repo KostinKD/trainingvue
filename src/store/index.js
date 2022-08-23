@@ -1,36 +1,22 @@
 import { createStore } from 'vuex'
+import counterModule from './modules/counterModule'
 
 export default createStore({
-  state: {
-      counter: 1,
-    isAuth: true
+  modules:{
+    countertestname: counterModule
+  },
+
+  state(){
+    return {
+      appTitle: 'globalstate',
+      appBody: 'GLOBAL BODY'
+    }
   },
   getters: {
-    counterGetter(state){
-      if (state.counter > 10) {
-        return 0
-      }
-      return state.counter
-    },
-    doubleCounter(_, getters){
-      return getters.counterGetter * 2
+    lowerCaseTitle(state){
+      return (
+          state.appTitle.toUpperCase()
+      )
     }
-  },
-  mutations: {
-    increment(state){
-      state.counter++
-    },
-    addFive(state, payload){
-      state.counter += payload.value
-    }
-  },
-  actions: {
-    incrementAsync(context, payload){
-      setTimeout(()=>{
-        context.commit('addFive',payload)
-      }, payload.delay)
-    }
-  },
-  modules: {
   }
 })

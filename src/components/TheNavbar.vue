@@ -1,22 +1,28 @@
 <template>
 
   <div class="navbar">
-    {{ counters.counter }}
-    {{ $store.state.isAuth}}
+<!--    {{ counters.counter }}-->
+    <p>{{ lowerCaseTitle }}</p>
     <button class="btn" @click="add">Add</button>
   </div>
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
+
 export default {
   // Обращение напрямую минуя store т.к у нас есть зависимость
   computed: {
-    counters(){
-      return this.$store.state
-    }
+    // counters(){
+    //   return this.$store.getters.counter
+    // },
+    //
+    ...mapGetters(['counter', 'lowerCaseTitle'])
   },
   methods: {
+    ...mapMutations(['addFive']),
     add(){
+      this.addFive({value: 1 })
       // vuex style
       //Так же мы можем в коммит передоавать объекты
       // return this.$store.commit('addFive', {
@@ -26,10 +32,7 @@ export default {
       // })
 
     //  redux style равнозначны сверху
-      this.$store.commit({
-        type: 'addFive',
-        value: 5
-      })
+    //
     }
   }
 }
