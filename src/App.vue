@@ -5,7 +5,12 @@
       <small>data,methods,computed,watch</small>
       <hr>
       <p>Название: <strong>{{name}}</strong></p>
-      <p>Версия: <strong>{{version}}</strong></p>
+      <p>Версия: <strong>{{version}} ({{doubleVersion}})</strong></p>
+
+      <div class="form-control">
+<!--        <input type="text" ref="textInput">-->
+        <input type="text" v-model="firstName">
+      </div>
 
       <button class="btn" @click="change">Изменить</button>
     </div>
@@ -13,30 +18,42 @@
 </template>
 
 <script>
-import {ref,reactive, toRefs, isRef, isReactive} from 'vue'
+import {ref,reactive, toRefs, isRef, isReactive, computed, watch} from 'vue'
 
 export default {
   name: 'App',
+  // setup заменяет data,methods,computed,watch
   setup(){
 
     // константа ниже framework равнасильна этой записи
     const name = ref('VueJS')
     let version = ref(3)
-
-
-    console.log(isRef(name))
+    const textInput = ref(null)
+    const firstName = ref(null)
 
     const framework = reactive({
       name: 'VueJs',
       version: 3
     })
 
-    console.log(isReactive(framework))
-    console.log(framework)
+
+
+    const doubleVersion = computed(() => {
+      return version.value * 2
+    })
+
+    watch([doubleVersion, name],(newValues, oldValues) => {
+      console.log('new', newValues[0])
+      console.log('new nm', newValues[1])
+      console.log('old', oldValues[0])
+      console.log('old nm', oldValues[1])
+    })
+
+    console.log(isRef())
     function changeInfo(){
       name.value = 'works'
       version.value = 4
-
+      console.log(textInput.value.value)
       //REF
       // framework.value.name = 'It works'
       // framework.value.version = 4
@@ -47,7 +64,6 @@ export default {
       // console.log(framework.value.name)
       // console.log(framework.value.version)
     }
-
     return {
 
         //ПОЛУЧАЕМ ЗНАЧЕНИЕ -> PROXY -> ВЫВОД и при измнении мы изменяем только прокси, но не значения в экспорте
@@ -56,8 +72,13 @@ export default {
 
       // ...toRefs(framework),
       framework: framework,
-      change: changeInfo
+      change: changeInfo,
+      doubleVersion,
+      textInput,
+      firstName
     }
+
+
   },
   components: {
 
