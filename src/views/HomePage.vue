@@ -1,5 +1,5 @@
 <template>
-  <app-alert v-if="alert" title="Работа с Compsiition API"  type ="danger" @click="close">  </app-alert>
+<!--  <app-alert v-if="simpleAlert" title="Работа с Compsiition API"  type ="danger" @click="close">  </app-alert>-->
 
   <div class="card">
     <h1>Composition Vue</h1>
@@ -40,7 +40,7 @@ export default {
     Frameworkinfo, AppAlert
   },
   setup(){
-     const {alert,close,toggle} = useAlert()
+     // const [simpleAlert,toggle,close] = useAlert()
     // константа ниже framework равнасильна этой записи
     const name = ref('VueJS')
     let version = ref(3)
@@ -118,9 +118,9 @@ export default {
       // textInput,
       firstName,
       changever: changever,
-      alert,
-      toggle,
-      close
+      // simpleAlert,
+      // toggle,
+      // close
     }
 
 
