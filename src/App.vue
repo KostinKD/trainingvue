@@ -4,9 +4,6 @@
       <h1>Composition Vue</h1>
       <small>data,methods,computed,watch</small>
       <hr>
-      <p>Название: <strong>{{name}}</strong></p>
-      <p>Версия: <strong>{{version}} ({{doubleVersion}})</strong></p>
-
       <div class="form-control">
 <!--        <input type="text" ref="textInput">-->
         <input type="text" v-model="firstName">
@@ -14,14 +11,22 @@
 
       <button class="btn" @click="change">Изменить</button>
     </div>
+    <Frameworkinfo @change-version="changeVersion" @change-ver="changever" class="test-from-app">
+      <template #footer><p>Footer</p></template>
+    </Frameworkinfo>
+
   </div>
 </template>
 
 <script>
-import {ref,reactive, toRefs, isRef, isReactive, computed, watch} from 'vue'
+import {ref,reactive, toRefs, isRef, isReactive, computed, watch, provide,onBeforeMount,onMounted,onBeforeUpdate,onUpdated,onBeforeUnmount,onUnmounted} from 'vue'
+import Frameworkinfo from "@/components/Frameworkinfo";
 
 export default {
   name: 'App',
+  components: {
+    Frameworkinfo
+  },
   // setup заменяет data,methods,computed,watch
   setup(){
 
@@ -37,22 +42,33 @@ export default {
     })
 
 
+    // const doubleVersion = computed(() => {
+    //   return version.value * 2
+    // })
 
-    const doubleVersion = computed(() => {
-      return version.value * 2
+    console.log('created')
+    onBeforeMount(()=>{
+      console.log('beforeMount')
+    })
+    onMounted(()=>{
+      console.log('mounted')
+    })
+    onBeforeUpdate(()=>{
+      console.log('beforeupdate')
+    })
+    onUpdated(()=>{
+      console.log('update')
+    })
+    onBeforeUnmount(()=>{
+      console.log('beforeunmount')
+    })
+    onUnmounted(()=>{
+      console.log('unmount')
     })
 
-    watch([doubleVersion, name],(newValues, oldValues) => {
-      console.log('new', newValues[0])
-      console.log('new nm', newValues[1])
-      console.log('old', oldValues[0])
-      console.log('old nm', oldValues[1])
-    })
-
-    console.log(isRef())
     function changeInfo(){
       name.value = 'works'
-      version.value = 4
+      version.value = 42
       console.log(textInput.value.value)
       //REF
       // framework.value.name = 'It works'
@@ -64,23 +80,35 @@ export default {
       // console.log(framework.value.name)
       // console.log(framework.value.version)
     }
+
+    function changeVersion(num){
+      version.value = num
+    }
+
+    function changever(num){
+      version.value = num
+    }
+
+    provide('name', name)
+    provide('version', version)
+
+
     return {
 
         //ПОЛУЧАЕМ ЗНАЧЕНИЕ -> PROXY -> ВЫВОД и при измнении мы изменяем только прокси, но не значения в экспорте
-        name: name,
-        version: version,
+        // name,
+        // version,
 
       // ...toRefs(framework),
       framework: framework,
       change: changeInfo,
-      doubleVersion,
-      textInput,
-      firstName
+      changeVersion: changeVersion,
+      // doubleVersion,
+      // textInput,
+      firstName,
+      changever: changever
     }
 
-
-  },
-  components: {
 
   },
 
