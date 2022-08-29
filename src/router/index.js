@@ -2,13 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import Help from '@/views/Help.vue'
 import Auth from "@/views/Auth";
+import store from "@/store";
+// import auth from "@/store/modules/auth.module";
 
 const routes = [
   {
     path: '/',
     name: 'home',
     meta: {
-      layout: 'main'
+      layout: 'main',
+      auth: true
     },
     component: Home
   },
@@ -20,7 +23,8 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
     meta: {
-      layout: 'main'
+      layout: 'main',
+      auth: true
     },
     component: Help,
   },
@@ -28,7 +32,8 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     meta: {
-      layout: 'auth'
+      layout: 'auth',
+      auth: false
     },
     component: () => import('@/views/Auth') //lazy-loading - будет подружаться только при вызове
 
@@ -38,6 +43,18 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next)=>{
+  const requireAuth = to.meta.auth
+
+  if (requireAuth && store.getters['auth/isAuthenticated']){
+    next()
+  } else if (requireAuth && !store.getters['auth/isAuthenticated']){
+    next('/auth?message=auth')
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -9,7 +9,7 @@
     <div :class="['form-control', {invalid: pError}]">
       <label>Пароль</label>
       <input type="text" name="passwordAuth" id="passwordAuth" v-model="password" @blur="pBlur">
-      <small v-if="pError">{{pError}}</small>
+      <small v-if="pError">{{ pError }}</small>
     </div>
       <button class="btn primary" type="submit" :disabled="isSubmitting || isTooManyAttempts">Войти</button>
     <div class="text-danger" v-if="isTooManyAttempts">Вы часто заходите в систему. Попробуйте позже</div>
@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import useloginForm from '@/use/login-form'
+import {useLoginForm} from "@/use/login-form";
 
 export default {
   setup(){
-    return {...useloginForm}
+    return {...useLoginForm()}
   }
 }
 </script>

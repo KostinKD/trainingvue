@@ -1,8 +1,12 @@
 import {useField, useForm} from "vee-validate";
 import * as yup from "yup";
 import {computed, ref, watch} from "vue";
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 
-export function useloginForm() {
+export function useLoginForm() {
+    const store = useStore()
+    const router = useRouter()
     const {handleSubmit, isSubmitting, submitCount} = useForm()
 
     const {value: email, errorMessage: eError, handleBlur: eBlur} = useField(
@@ -23,12 +27,14 @@ export function useloginForm() {
         }
     })
 
-    const onSubmit = handleSubmit(values => {
+    const onSubmit = handleSubmit( async values => {
         console.log(values)
+        await store.dispatch('auth/login', values)
+        router.push('/')
     })
 
-    const emailAuth = ref('')
-    const passwordAuth = ref('')
+    // const emailAuth = ref('')
+    // const passwordAuth = ref('')
 
 
     return{
