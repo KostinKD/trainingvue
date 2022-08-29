@@ -148,7 +148,9 @@ h3 {
 }
 
 .form-control input,
-.form-control select {
+.form-control select,
+.form-control textarea{
+    font-family: Inter, Roboto, Oxygen, Fira Sans, Helvetica Neue, sans-serif;
     margin: 0;
     outline: none;
     border: 2px solid #ccc;
@@ -158,6 +160,7 @@ h3 {
     padding: 0.5rem 1.5rem;
     border-radius: 3px;
     font-size: 1rem;
+    resize: none;
 }
 
 .form-control small {
@@ -271,6 +274,14 @@ h3 {
     color: #222;
 }
 
+.alert-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 .modal {
     position: fixed;
     top: 60px;
@@ -291,6 +302,7 @@ h3 {
     left: 0;
     bottom: 0;
     background: rgba(0, 0, 0, .35);
+    z-index: 100;
 }
 
 
@@ -393,4 +405,119 @@ h3 {
 
 .navbar-menu li a:hover, .navbar-menu li a.active {
     border-bottom: 2px solid #3eaf7c;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge {
+    font-size: 0.8rem;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 0 .5rem;
+}
+
+.badge.primary {
+    border-color: #3eaf7c;
+    color: #3eaf7c;
+}
+
+.badge.danger {
+    border-color: #e53935;
+    color: #e53935;
+}
+
+.badge.warning {
+    border-color: #c25205;
+    color: #c25205;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-danger {
+    color: #e53935;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    padding: .5rem 1rem;
+}
+
+.table td {
+    padding: .5rem 1rem;
+}
+
+.table tbody td {
+    text-align: center;
+}
+
+.table tbody tr:hover {
+    background: #eee;
+}
+
+.breadcrumbs {
+    margin-bottom: .5rem;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filter > div {
+    margin-right: 2rem;
+    width: 30%;
+    margin-bottom: 0;
+}
+
+.sidebar {
+    position: fixed;
+    width: 300px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #ccc;
+    z-index: 100;
+    padding: .5rem;
+}
+
+.sidebar-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.sidebar-content {
+    margin-top: 50px;
+}
+
+.question {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.question:hover {
+    cursor: pointer;
+    background: #eee;
+}
+
+.question-title {
+    font-weight: bold;
 }
