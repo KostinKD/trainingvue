@@ -11,7 +11,7 @@
       <input type="text" name="passwordAuth" id="passwordAuth" v-model="password" @blur="pBlur">
       <small v-if="pError">{{ pError }}</small>
     </div>
-      <button class="btn primary" type="submit" :disabled="isSubmitting || isTooManyAttempts">Войти</button>
+      <button class="btn primary" type="submit" :disabled="isSubmitting || isTooManyAttempts" @keyup.enter="onSubmit">Войти</button>
     <div class="text-danger" v-if="isTooManyAttempts">Вы часто заходите в систему. Попробуйте позже</div>
   </form>
 </template>

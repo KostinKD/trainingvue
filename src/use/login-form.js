@@ -14,7 +14,7 @@ export function useLoginForm() {
         yup.string().trim().required('Введите email').email('Введите корректный email')
     )
 
-    const PASS_MIN_LENGHT = 7
+    const PASS_MIN_LENGHT = 6
     const {value: password, errorMessage: pError, handleBlur: pBlur} = useField(
         'password',
         yup.string().trim().required('Введите пароь').min(PASS_MIN_LENGHT, `Пароль должен быть от ${PASS_MIN_LENGHT} символов, сейчас:`)
