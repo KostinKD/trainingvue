@@ -3,8 +3,7 @@
     <template #header>
       <button class="btn primary" @click="modal = true">Создать</button>
     </template>
-    <request-table :requests="[]"></request-table>
-
+    <request-table :requests="requests"></request-table>
 
     <teleport to="body">
       <app-modal v-if="modal" title="Создать заявку" @close="modal = false">
@@ -22,17 +21,21 @@ import AppPage from "@/components/ui/AppPage";
 import RequestTable from "@/components/request/RequestTable";
 import AppModal from "@/components/ui/AppModal";
 import RequestModal from "@/components/request/RequestModal";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
+
 export default {
   name: 'Home',
   components: {AppPage,RequestTable,AppModal,RequestModal},
   setup(){
     const modal = ref(false)
+    const store = useStore()
 
-
+    const requests = computed(() => store.getters['request/requests'])
 
     return{
       modal,
+      requests
 
     }
   }
