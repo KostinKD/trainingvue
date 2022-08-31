@@ -29,7 +29,7 @@ export default {
       done: 'Завершен',
       pending: 'В ожидании'
     }
-    watch(props, value => {
+    watch(props, val => {
       className.value = classesMap[val.type]
       text.value = textMap[val.type]
     })
